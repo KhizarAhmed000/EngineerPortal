@@ -4,6 +4,17 @@ import React from 'react';
 import OnBoard from '../../screens/OnBoard';
 import navigationService from './navigationService';
 import Login from '../../screens/Login';
+import SignUp from '../../screens/SignUp';
+import SignUpSuccessful from '../../screens/SignUpSuccessful';
+import FirstStep from '../../screens/FirstStep';
+import AllSet from '../../screens/AllSet';
+import StepTwo from '../../screens/StepTwo';
+import SignUpEngineer from '../../screens/SignUpEngineer';
+import AdminPanel from '../../screens/AdminPanel';
+import PendingApproval from '../../screens/PendingApprovals';
+import AllEngineers from '../../screens/AllEngineers';
+import ApproveEngineer from '../../screens/ApproveEngineer';
+import RemoveEngineer from '../../screens/RemoveEngineer';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +35,19 @@ const UserStack = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="OnBoard" component={OnBoard} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="SignUpEngineer" component={SignUpEngineer} />
+            <Stack.Screen name="SignUpSuccessful" component={SignUpSuccessful} />
+            <Stack.Screen name="FirstStep" component={FirstStep} />
+            <Stack.Screen name="AllSet" component={AllSet} />
+            <Stack.Screen name="StepTwo" component={StepTwo} />
+            <Stack.Screen name="AdminPanel" component={AdminPanel} />
+            <Stack.Screen name="PendingApproval" component={PendingApproval} />
+            <Stack.Screen name="AllEngineers" component={AllEngineers} />
+            <Stack.Screen name="ApproveEngineer" component={ApproveEngineer} />
+            <Stack.Screen name="RemoveEngineer" component={RemoveEngineer} />
+
+
             
         </Stack.Navigator>
     )

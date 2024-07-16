@@ -9,6 +9,7 @@ import personTwo from '../../../asset/personTwo.png';
 import rightArrow from '../../../asset/rightArrow.png';
 import tickAfter from '../../../asset/tickAfter.png';
 import tickBefore from '../../../asset/tickBefore.png';
+import rightArrowBlack from '../../../asset/rightArrowBlack.png';
 
 
 export const images = {
@@ -22,5 +23,6 @@ personThree,
 personTwo,
 rightArrow,
 tickAfter,
-tickBefore
+tickBefore,
+rightArrowBlack
 }

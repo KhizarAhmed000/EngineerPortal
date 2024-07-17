@@ -7,11 +7,11 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.bgColor,
         height: sizes.screenHeight,
-        alignItems: 'center'
     },
     onBoardImg: {
         resizeMode: 'contain',
-        marginTop:sizes.screenHeight*0.05
+        marginTop:sizes.screenHeight*0.03,
+        alignSelf:'center'
     },
     heading: {
         fontSize: fontSize.h2,
@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
         width: sizes.screenWidth * 0.8,
         lineHeight: sizes.screenHeight * 0.05,
         textAlign:"left",
+        marginHorizontal:sizes.screenWidth*0.05
     },
     buttonConatiner: {
         backgroundColor: colors.white,

@@ -5,10 +5,18 @@ import { images } from '../../services/utilities/images';
 import Button from '../../component/Button';
 
 export default function OnBoard({ navigation }) {
+    
     const handleLogin = () => {
         navigation.navigate("Login")
     }
     
+    const handleSignUp = () => {
+        navigation.navigate("SignUp")
+    }
+
+    const handleStartEngineer = () => {
+        navigation.navigate("SignUpEngineer")
+    }
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -20,10 +28,10 @@ export default function OnBoard({ navigation }) {
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <View style={styles.marginTop}>
-                <Button title={'Sign Up'}/>
+                <Button title={'Sign Up'} onPress={() => handleSignUp()}/>
                 </View>
                 <View style={styles.marginTop}>
-                <Button title={'Start as Engineer'}/>
+                <Button title={'Start as Engineer'} onPress={() => handleStartEngineer()}/>
                 </View>
             </View>
         </SafeAreaView>

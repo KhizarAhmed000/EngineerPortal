@@ -10,9 +10,10 @@ import rightArrow from '../../../asset/rightArrow.png';
 import tickAfter from '../../../asset/tickAfter.png';
 import tickBefore from '../../../asset/tickBefore.png';
 import rightArrowBlack from '../../../asset/rightArrowBlack.png';
-
+import building from '../../../asset/building.png';
 
 export const images = {
+building,
 backArrow,
 bigTick,
 googleLogo,

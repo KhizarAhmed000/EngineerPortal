@@ -15,6 +15,13 @@ import PendingApproval from '../../screens/PendingApprovals';
 import AllEngineers from '../../screens/AllEngineers';
 import ApproveEngineer from '../../screens/ApproveEngineer';
 import RemoveEngineer from '../../screens/RemoveEngineer';
+import EngineerPanel from '../../screens/EngineerPanel';
+import EngineerPortfolio from '../../screens/EngineerPortfolio';
+import UserPanel from '../../screens/UserPanel';
+import UserBookAppointment from '../../screens/UserBookAppointment';
+import UserBookEngineer from '../../screens/UserBookEngineer';
+import UserAppointments from '../../screens/UserAppointments';
+import UserProjects from '../../screens/UserProjects';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,7 +40,14 @@ export default function Navigation() {
 const UserStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="UserProjects" component={UserProjects} />
+            <Stack.Screen name="UserBookAppointment" component={UserBookAppointment} />
+            <Stack.Screen name="UserAppointments" component={UserAppointments} />
+            <Stack.Screen name="UserBookEngineer" component={UserBookEngineer} />
+            <Stack.Screen name="UserPanel" component={UserPanel} />
             <Stack.Screen name="OnBoard" component={OnBoard} />
+            <Stack.Screen name="EngineerPortfolio" component={EngineerPortfolio} />
+            <Stack.Screen name="EngineerPanel" component={EngineerPanel} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="SignUpEngineer" component={SignUpEngineer} />

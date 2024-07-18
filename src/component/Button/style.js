@@ -12,6 +12,8 @@ export const styles = StyleSheet.create({
     height: sizes.screenHeight * 0.06,
     width: sizes.screenWidth * 0.91,
     borderRadius:sizes.screenWidth * 0.02,
+    position: "absolute",
+    bottom: sizes.screenHeight*-0.14,
   },
   btnText:{
     color:colors.white,

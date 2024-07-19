@@ -15,6 +15,7 @@ import PendingApproval from '../../screens/PendingApprovals';
 import AllEngineers from '../../screens/AllEngineers';
 import ApproveEngineer from '../../screens/ApproveEngineer';
 import RemoveEngineer from '../../screens/RemoveEngineer';
+import AddProject from '../../screens/AddProject';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ export default function Navigation() {
 const UserStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="AddProject" component={AddProject} />
             <Stack.Screen name="OnBoard" component={OnBoard} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
@@ -46,9 +48,6 @@ const UserStack = () => {
             <Stack.Screen name="AllEngineers" component={AllEngineers} />
             <Stack.Screen name="ApproveEngineer" component={ApproveEngineer} />
             <Stack.Screen name="RemoveEngineer" component={RemoveEngineer} />
-
-
-            
         </Stack.Navigator>
     )
 }

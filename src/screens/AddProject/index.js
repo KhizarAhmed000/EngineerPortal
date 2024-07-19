@@ -51,43 +51,40 @@ export default function AddProject({ navigation }) {
             launchImageLibrary(options, response => {
                 console.log('Library Response:', response);
                 try {
-                    const uri = response.assets[0].uri;
-                    if (uri) {
-                        setImage(prevState => [...prevState, { image: { uri } }]);
+                    if (response.assets.length > 0) {
+                        const uri = response.assets[0].uri;
+                        setImage(prevState => [...prevState, { pic: { uri } }]);
                     } else {
-                        console.warn('No image URI found in response');
+                        console.warn('No image selected from library');
                     }
                 } catch (error) {
                     console.error('Error setting image:', error);
                 }
             });
+            
         } else if (sourceType === 'camera') {
             await requestCameraPermission();
 
             launchCamera(options, response => {
                 console.log('** Full Camera Response:**', response.assets[0].uri);
                 try {
-                    const uri = response.assets[0].uri;
-                    if (!uri) {
-                        const cameraResponseUri = response.path || response.uri;
-                        if (cameraResponseUri) {
-                            console.log('Using alternative camera URI:', cameraResponseUri);
-                            setImgUri(cameraResponseUri);
-                        } else {
-                            console.log('No image URI found in camera response');
-                        }
+                    if (response.assets.length > 0) {
+                        const uri = response.assets[0].uri;
+                        setImage(prevState => [...prevState, { pic: { uri } }]);
                     } else {
-                        setImgUri(uri);
+                        console.warn('No image taken from camera');
                     }
                 } catch (error) {
-                    console.error('Error setting imgUri:', error);
+                    console.error('Error setting image:', error);
                 }
             });
+            
         }
     };
     const deleteImage = index => {
         setImage(prevState => prevState.filter((_, i) => i !== index));
     };
+    
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -164,9 +161,10 @@ export default function AddProject({ navigation }) {
                             </ScrollView>
                         </View>
 
-                        <View style={styles.btnMargin}>
-                            <Button title={'Add Project'}/>
-                        </View>
+                    </View>
+
+                    <View style={styles.btnMargin}>
+                        <Button title={'Add Project'} />
                     </View>
                 </ScrollView>
 

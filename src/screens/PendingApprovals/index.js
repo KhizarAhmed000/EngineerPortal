@@ -4,32 +4,13 @@ import { styles } from './style';
 import { images } from '../../services/utilities/images';
 import BackButton from '../../component/BackButton';
 
-export default function PendingApproval({navigation}) {
-    const [pendingApproval, setPendingApproval] = useState([
-        {
-            image: images.personOne,
-            name: 'Jenny Wilson',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personTwo,
-            name: 'Jane Cooper',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personThree,
-            name: 'Kathryn Murphy',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personTwo,
-            name: 'Savannah Nguyen',
-            desigination: 'Engineer'
-        },
-    ])
+export default function PendingApproval({navigation,route}) {
+    const { listOfApprovals } = route.params
 
-    const handleApprove = () => {
-        navigation.navigate('ApproveEngineer')
+    const handleApprove = (i) => {
+        navigation.navigate('ApproveEngineer',{
+            engineer:listOfApprovals[i]
+        })
     }
 
     return (
@@ -41,12 +22,12 @@ export default function PendingApproval({navigation}) {
                 <ScrollView
                     style={styles.scrollView}
                 >
-                    {pendingApproval.map((item, index) => (
-                        <TouchableOpacity style={styles.boxTwo} key={index} onPress={() => handleApprove()}>
-                            <Image style={styles.personImg} source={item.image} />
+                    {listOfApprovals.map((item, index) => (
+                        <TouchableOpacity style={styles.boxTwo} key={index} onPress={() => handleApprove(index)}>
+                            <Image style={styles.personImg} source={images.personOne} />
                             <View style={styles.columnView}>
                                 <Text style={styles.nameText}>{item.name}</Text>
-                                <Text style={styles.desiginationText}>{item.desigination}</Text>
+                                <Text style={styles.desiginationText}>Engineer</Text>
                             </View>
                             <View style={styles.seeAllBtn}>
                                 <Text style={styles.btnText}>APPROVE</Text>

@@ -3,22 +3,80 @@ import { Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from 're
 import { styles } from './style';
 import { colors } from '../../services/utilities/colors';
 import { images } from '../../services/utilities/images';
+import backendUrl from '../../services/config/backendUrl';
 
 export default function Login({ navigation }) {
-    const [name, setName] = useState("")
-    const [password, setPassword] = useState("")
+    const [name, setName] = useState()
+    const [password, setPassword] = useState()
     const [isChecked, setIsChecked] = useState(false);
+    const [error, setError] = useState()
 
     const toggleRememberMe = () => {
         setIsChecked(!isChecked);
     };
     const handleSignUp = () => {
-        navigation.navigate("SignUp")
+
+        navigation.navigate("SignUp",{
+            role:"user"
+        })
     }
 
+    const handleValidation = () => {
+        if (!name) {
+            setError("Name is required");
+        } else if (!password) {
+            setError("Password is required");
+        } else {
+            setError("validated");
+        }
+    };
+
     const handleLogin = () => {
-        navigation.navigate("AdminPanel")
+        handleValidation()
+        if (error === "validated") {
+            console.log("validated")
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            const raw = JSON.stringify({
+                "password": password,
+                "email": name
+            });
+
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+            };
+
+            fetch(`${backendUrl}auth/signin`, requestOptions)
+                .then((response) => response.text())
+                .then((result) => {
+                    const data = JSON.parse(result);
+                    console.log(data)
+                    if (data.member.role === 'admin') {
+                        console.log(data.member.role," login")
+                        navigation.navigate("AdminPanel",{
+                            role:data.member.role
+                        });
+                    } else if (data.member.role === 'engineer') {
+                        console.log(data.member.role," login")
+                        navigation.navigate("EngineerPanel",{
+                            role:data.member.role
+                        });
+                    } else if (data.member.role === 'user') {
+                        console.log(data.member.role," login")
+                        navigation.navigate("UserPanel",{
+                            role:data.member.role
+                        });
+                    }
+                })
+                .catch((error) => console.error(error));
+
+        }
     }
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -26,7 +84,7 @@ export default function Login({ navigation }) {
                 <Text style={styles.headingTwo}>Log In to your account</Text>
                 <TextInput
                     style={styles.inputTextContainer}
-                    placeholder='Enter your name'
+                    placeholder='Enter your email'
                     placeholderTextColor={colors.black}
                     value={name}
                     onChangeText={setName}
@@ -51,15 +109,19 @@ export default function Login({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.rowTwo}>
-                    <TouchableOpacity style={styles.btnContainer} onPress={()=> handleLogin()}>
+                    <TouchableOpacity style={styles.btnContainer} onPress={() => handleLogin()}>
                         <Text style={styles.btnText}>Login</Text>
                     </TouchableOpacity>
-                    <Text style={styles.remeberMeText}>Or</Text>
                 </View>
-                <TouchableOpacity style={styles.btnContainerTwo} >
+                {/* <TouchableOpacity style={styles.btnContainerTwo} >
                     <Image source={images.googleLogo} style={styles.googleImg} />
                     <Text style={styles.btnTextTwo}>Log in with your Google account</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <View>
+                    <Text style={error === "validated" ? styles.errorValidated : styles.error}>
+                        {error}
+                    </Text>
+                </View>
                 <View style={styles.textCombine}>
                     <Text style={styles.textOne}>
                         Dont’t have an account?

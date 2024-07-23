@@ -40,12 +40,14 @@ export default function Navigation() {
 const UserStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="OnBoard" component={OnBoard} />
+            <Stack.Screen name="AdminPanel" component={AdminPanel} />
+            <Stack.Screen name="StepTwo" component={StepTwo} />
             <Stack.Screen name="UserProjects" component={UserProjects} />
             <Stack.Screen name="UserBookAppointment" component={UserBookAppointment} />
             <Stack.Screen name="UserAppointments" component={UserAppointments} />
             <Stack.Screen name="UserBookEngineer" component={UserBookEngineer} />
             <Stack.Screen name="UserPanel" component={UserPanel} />
-            <Stack.Screen name="OnBoard" component={OnBoard} />
             <Stack.Screen name="EngineerPortfolio" component={EngineerPortfolio} />
             <Stack.Screen name="EngineerPanel" component={EngineerPanel} />
             <Stack.Screen name="Login" component={Login} />
@@ -54,8 +56,6 @@ const UserStack = () => {
             <Stack.Screen name="SignUpSuccessful" component={SignUpSuccessful} />
             <Stack.Screen name="FirstStep" component={FirstStep} />
             <Stack.Screen name="AllSet" component={AllSet} />
-            <Stack.Screen name="StepTwo" component={StepTwo} />
-            <Stack.Screen name="AdminPanel" component={AdminPanel} />
             <Stack.Screen name="PendingApproval" component={PendingApproval} />
             <Stack.Screen name="AllEngineers" component={AllEngineers} />
             <Stack.Screen name="ApproveEngineer" component={ApproveEngineer} />

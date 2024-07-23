@@ -3,29 +3,88 @@ import { Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from 're
 import { styles } from './style';
 import { colors } from '../../services/utilities/colors';
 import { images } from '../../services/utilities/images';
+import backendUrl from '../../services/config/backendUrl';
 
 
-export default function SignUpEngineer({navigation}) {
+export default function SignUpEngineer({navigation,route}) {
     const [name, setName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    const [isChecked, setIsChecked] = useState(false);
-
-    const toggleRememberMe = () => {
+    const [error, setError] = useState("validated")
+    const { role } = route.params;
+    const [isChecked, setIsChecked] = useState(false)
+    const toggleTerms = () => {
         setIsChecked(!isChecked);
     };
 
+    const handleSubmit = () => {
+        if (!name) {
+            setError("Name is required");
+        } else if (!lastName) {
+            setError("Last name is required");
+        } else if (!email) {
+            setError("Email is required");
+        } else if (!password) {
+            setError("Password is required");
+        } else if (!confirmPassword) {
+            setError("Confirm password is required");
+        } else if (password !== confirmPassword) {
+            setError("Passwords do not match");
+        } else if (!isChecked) {
+            setError("Please accept the terms and conditions");
+        } else {
+            setError("validated");
+            // Proceed with form submission
+            console.log("Form submitted");
+        }
+    };
+
     const handleSignUpSuccess = () => {
-        navigation.navigate("FirstStep")
+        handleSubmit()
+        if(error==="validated"){
+            const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "name": name,
+            "lastname": lastName,
+            "password": password,
+            "email": email,
+            "role": role
+        });
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch(`${backendUrl}auth/signup`, requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                const data = JSON.parse(result);
+                console.log(data.message);
+                console.log(result)
+                if (data.message === "Signup success") {
+                    navigation.navigate("FirstStep",{
+                        email: email,
+                        name: name,
+                        lastName: lastName
+                    });
+                }
+            })
+            .catch((error) => console.error(error));
+        }
     }
 
     return (
         <SafeAreaView>
             <View style={styles.container}>
                 <Text style={styles.headingOne}>Welcome!</Text>
-                <Text style={styles.headingTwo}>Sign up for the Xtract Engineers App</Text>
+                <Text style={styles.headingTwo}>Sign up As an Engineer</Text>
                 <TextInput
                     style={styles.inputTextContainer}
                     placeholder='Enter your name'
@@ -65,7 +124,7 @@ export default function SignUpEngineer({navigation}) {
                 />
                 <View style={styles.rowOne}>
                     <View style={styles.checkBox}>
-                        <TouchableOpacity onPress={toggleRememberMe}>
+                        <TouchableOpacity onPress={toggleTerms}>
                             <Image source={isChecked ? images.tickAfter : images.tickBefore} />
                         </TouchableOpacity>
                     </View>
@@ -79,6 +138,11 @@ export default function SignUpEngineer({navigation}) {
 
 
                 </View>
+                <View>
+                    <Text style={error === "validated" ? styles.errorValidated : styles.error}>
+                            {error}
+                        </Text>
+                    </View>
                 <TouchableOpacity style={styles.btnContainer} 
                 onPress={() => handleSignUpSuccess()}
                 >

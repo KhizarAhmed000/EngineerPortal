@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
         justifyContent:'space-between'
     },
     btnMarginTop:{
-        marginTop:sizes.screenHeight*0.42
+        marginTop:sizes.screenHeight*0.33
     }
 
 })

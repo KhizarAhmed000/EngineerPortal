@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
     },
     btnContainer: {
         backgroundColor: colors.darkBlue,
-        marginHorizontal: sizes.screenWidth * 0.05,
+        marginHorizontal: sizes.screenWidth * 0.13,
         justifyContent: 'center',
         alignItems: 'center',
         height: sizes.screenHeight * 0.06,
@@ -107,8 +107,18 @@ export const styles = StyleSheet.create({
     },
     textCombine: {
         marginTop: sizes.screenHeight * 0.05,
-        flexDirection:'row'
+        flexDirection:'row' 
      
+    },
+    errorValidated:{
+        color: "#FF2F03",
+        opacity: 0,
+        marginTop:sizes.screenHeight*0.02
+    },
+    error:{
+        color: "#FF2F03",
+        marginTop:sizes.screenHeight*0.02
     }
+
 
 })

@@ -6,10 +6,16 @@ import { styles } from './styles';
 
 
 
-export default function FirstStep({navigation}) {
+export default function FirstStep({navigation,route}) {
 
+    const { email,name,lastName } = route.params
     const handleNextStep = () => {
-        navigation.navigate("StepTwo")
+        navigation.navigate("StepTwo",{
+            email:email,
+            name:name,
+            lastName:lastName
+        })
+        console.log(email)
     }
 
     return (

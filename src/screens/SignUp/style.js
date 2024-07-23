@@ -68,6 +68,13 @@ export const styles = StyleSheet.create({
     },
     combineText:{
         marginStart:sizes.screenWidth*0.03
+    },
+    errorValidated:{
+        color: "#FF2F03",
+        opacity: 0,
+    },
+    error:{
+        color: "#FF2F03"
     }
 
 })

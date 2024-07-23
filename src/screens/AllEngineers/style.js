@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         borderWidth: sizes.screenWidth * 0.004,
         borderColor: colors.darkBlue,
         flexDirection: 'row',
-        paddingHorizontal: sizes.screenWidth * 0.025,
+        paddingHorizontal: sizes.screenWidth * 0.015,
         paddingVertical: sizes.screenHeight * 0.003,
         borderRadius: sizes.screenWidth * 0.06,
         alignItems: 'center',

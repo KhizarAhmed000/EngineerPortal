@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     },
     rowOne: {
         flexDirection: 'row',
-        marginTop: sizes.screenHeight * 0.05,
+        marginTop: sizes.screenHeight * 0.03,
         alignItems: 'center',
         width: sizes.screenWidth * 0.91,
         alignSelf:"center"
@@ -95,5 +95,16 @@ export const styles = StyleSheet.create({
         alignSelf:'center',
         textAlign:'center',
         marginHorizontal:sizes.screenWidth*0.05
+    },
+    errorValidated:{
+        color: "#FF2F03",
+        opacity: 0,
+        justifyContent: "center"
+    },
+    error:{
+        color: "#FF2F03",
+        justifyContent: "center",
+        textAlign: "center",
+        marginTop: sizes.screenHeight*0.01
     }
 })

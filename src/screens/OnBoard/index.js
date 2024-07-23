@@ -11,11 +11,15 @@ export default function OnBoard({ navigation }) {
     }
     
     const handleSignUp = () => {
-        navigation.navigate("SignUp")
+        navigation.navigate("SignUp",{
+            role:"user"
+        })
     }
 
     const handleStartEngineer = () => {
-        navigation.navigate("SignUpEngineer")
+        navigation.navigate("SignUpEngineer",{
+            role:"engineer"
+        })
     }
     return (
         <SafeAreaView>

@@ -131,5 +131,8 @@ export const styles = StyleSheet.create({
     // },
     scrollViewChild:{
         height: sizes.screenHeight*0.4,
+    },
+    btnMarginTop:{
+        marginTop:sizes.screenHeight*0.03
     }
 })

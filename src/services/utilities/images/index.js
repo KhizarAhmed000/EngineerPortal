@@ -10,8 +10,9 @@ import rightArrow from '../../../asset/rightArrow.png';
 import tickAfter from '../../../asset/tickAfter.png';
 import tickBefore from '../../../asset/tickBefore.png';
 import rightArrowBlack from '../../../asset/rightArrowBlack.png';
+import plus from '../../../asset/plus.png';
+import crossCircle from '../../../asset/crossCircle.png';
 import building from '../../../asset/building.png';
-
 export const images = {
 building,
 backArrow,
@@ -25,5 +26,7 @@ personTwo,
 rightArrow,
 tickAfter,
 tickBefore,
-rightArrowBlack
+rightArrowBlack,
+plus,
+crossCircle
 }

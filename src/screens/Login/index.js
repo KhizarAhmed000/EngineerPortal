@@ -16,8 +16,8 @@ export default function Login({ navigation }) {
     };
     const handleSignUp = () => {
 
-        navigation.navigate("SignUp",{
-            role:"user"
+        navigation.navigate("SignUp", {
+            role: "user"
         })
     }
 
@@ -53,29 +53,145 @@ export default function Login({ navigation }) {
             fetch(`${backendUrl}auth/signin`, requestOptions)
                 .then((response) => response.text())
                 .then((result) => {
+                    console.log(result)
                     const data = JSON.parse(result);
                     console.log(data)
                     if (data.member.role === 'admin') {
-                        console.log(data.member.role," login")
-                        navigation.navigate("AdminPanel",{
-                            role:data.member.role
+                        console.log(data.member.role, " login")
+                        navigation.navigate("AdminPanel", {
+                            role: data.member.role
                         });
                     } else if (data.member.role === 'engineer') {
-                        console.log(data.member.role," login")
-                        navigation.navigate("EngineerPanel",{
-                            role:data.member.role
+                        console.log(data.member.role, " login")
+
+                        const myHeaders = new Headers();
+                        myHeaders.append("Content-Type", "application/json");
+                        // console.log(email)
+                        const raw = JSON.stringify({
+                            "email": name
                         });
+
+                        const requestOptions = {
+                            method: "POST",
+                            headers: myHeaders,
+                            body: raw,
+                            redirect: "follow"
+                        };
+
+                        fetch(`${backendUrl}user/getEngineer`, requestOptions)
+                            .then((response) => response.text())
+                            .then((resultFirst) => {
+
+
+                                const myHeaders = new Headers();
+                                myHeaders.append("Content-Type", "application/json");
+
+                                const raw = JSON.stringify({
+                                    "email": name
+                                });
+
+                                const requestOptions = {
+                                    method: "POST",
+                                    headers: myHeaders,
+                                    body: raw,
+                                    redirect: "follow"
+                                };
+
+                                fetch(`${backendUrl}user/getEngineerProjects`, requestOptions)
+                                    .then((response) => response.text())
+                                    .then((result) => {
+                                        navigation.navigate("EngineerPanel", {
+                                            userData: resultFirst,
+                                            projects: result
+                                        });
+                                    })
+                                    .catch((error) => console.error(error));
+
+                                
+                            })
+                            .catch((error) => console.error(error));
+
+
+
+
                     } else if (data.member.role === 'user') {
-                        console.log(data.member.role," login")
-                        navigation.navigate("UserPanel",{
-                            role:data.member.role
-                        });
+                        console.log(data.member.role, " login")
+                        const requestOptions = {
+                            method: "GET",
+                            redirect: "follow"
+                          };
+                          
+                          fetch(`${backendUrl}user/getAllEngineers`, requestOptions)
+                            .then((response) => response.text())
+                            .then((result) => {
+                                const parsedEngineerData = JSON.parse(result)
+                                const hiredEngineers = filterHiredEngineers(parsedEngineerData.engineers,data.member.email)
+                                const projects = extractProjectIds(hiredEngineers)
+                                const appointments = extractAppointmentIds(hiredEngineers)
+                                // console.log("hiredEngineers:",hiredEngineers)
+                                // console.log(appointments)
+                                // console.log(projects)
+                                // console.log(result)
+                                navigation.navigate("UserPanel", {
+                                    result,
+                                    userData: data.member,
+                                    projects,
+                                    appointments,
+                                    hiredEngineers,
+                                });
+                            })
+                            .catch((error) => console.error(error));
+                        
                     }
                 })
                 .catch((error) => console.error(error));
 
         }
     }
+
+
+    const extractAppointmentIds = (data) => {
+        const appointmentIds = [];
+        for (let i = 0; i < data.length; i++) {
+            const engineer = data[i];
+            if (engineer.hasOwnProperty('appointments') && Array.isArray(engineer.appointments)) {
+                for (let j = 0; j < engineer.appointments.length; j++) {
+                    appointmentIds.push(engineer.appointments[j]);
+                }
+            }
+        }
+        return appointmentIds;
+    };
+
+    const extractProjectIds = (data) => {
+        const projectIds = [];
+        for (let i = 0; i < data.length; i++) {
+            const engineer = data[i];
+            if (engineer.hasOwnProperty('projects') && Array.isArray(engineer.projects)) {
+                for (let j = 0; j < engineer.projects.length; j++) {
+                    projectIds.push(engineer.projects[j]);
+                }
+            }
+        }
+        return projectIds;
+    };
+
+    const filterHiredEngineers = (data, searchString) => {
+        const hiredEngineers = [];
+        for (let i = 0; i < data.length; i++) {
+            const engineer = data[i];
+            if (engineer.hasOwnProperty('hiredBy')) {
+                for (let j = 0; j < engineer.hiredBy.length; j++) {
+                    const value = engineer.hiredBy[j];
+                    if (value.includes(searchString)) {
+                        hiredEngineers.push(engineer);
+                        break;
+                    }
+                }
+            }
+        }
+        return hiredEngineers;
+    };
 
     return (
         <SafeAreaView>

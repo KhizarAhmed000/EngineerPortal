@@ -3,72 +3,68 @@ import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'r
 import { images } from '../../services/utilities/images';
 import { styles } from './style';
 import BackButton from '../../component/BackButton';
+import Navigation from '../../services/config/navigation';
+import backendUrl from '../../services/config/backendUrl';
 
-export default function UserBookEngineer({navigation}) {
-    const [allEngineer, setAllEngineer] = useState([
-        {
-            image: images.personOne,
-            name: 'Jenny Wilson',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personTwo,
-            name: 'Jane Cooper',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personThree,
-            name: 'Kathryn Murphy',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personTwo,
-            name: 'Savannah Nguyen',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personOne,
-            name: 'Jenny Wilson',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personTwo,
-            name: 'Jane Cooper',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personThree,
-            name: 'Kathryn Murphy',
-            desigination: 'Engineer'
-        },
-        {
-            image: images.personTwo,
-            name: 'Savannah Nguyen',
-            desigination: 'Engineer'
-        },
-    ])
+export default function UserBookEngineer({ navigation, route }) {
+    const { result, userData } = route.params
+    // const parsedEngineerData = JSON.parse(engineerData) 
+    console.log(result, "------------booking page")
+    const engineerData = JSON.parse(result)
 
+    const handleBooking = (engineer) => {
+        console.log(engineer)
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "email": engineer.email
+        });
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch(`${backendUrl}user/getEngineerProjects`, requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                navigation.navigate("UserBookAppointment", {
+                    engineer,
+                    userData,
+                    projects:result
+                })
+            })
+            .catch((error) => console.error(error));
+    }
     return (
         <SafeAreaView>
             <View style={styles.container}>
                 <BackButton
-                onPress={() => navigation.goBack()}
-                title={'All Engineers'} />
+                    onPress={() => navigation.goBack()}
+                    title={'All Engineers'} />
                 <ScrollView
                     style={styles.scrollView}
                 >
-                    {allEngineer.map((item, index) => (
-                        <TouchableOpacity style={styles.boxTwo} key={index}>
-                            <Image style={styles.personImg} source={item.image} />
+                    {engineerData.engineers.map((item, index) => (
+                        <View style={styles.boxTwo} key={index}>
+                            <Image style={styles.personImg} source={images.personFour} />
                             <View style={styles.columnView}>
                                 <Text style={styles.nameText}>{item.name}</Text>
-                                <Text style={styles.desiginationText}>{item.desigination}</Text>
+                                <Text style={styles.desiginationText}>Engineer</Text>
                             </View>
-                            <View style={styles.seeAllBtn}>
-                                <Text style={styles.btnText}>BOOK</Text>
-                                <Image style={styles.arrowImg} source={images.rightArrow} />
+                            <View>
+                                <TouchableOpacity
+                                    style={styles.seeAllBtn}
+                                    onPress={() => handleBooking(item)} // Use an arrow function to pass the item
+                                >
+                                    <Text style={styles.btnText}>BOOK</Text>
+                                    <Image style={styles.arrowImg} source={images.rightArrow} />
+                                </TouchableOpacity>
                             </View>
-                        </TouchableOpacity>
+                        </View>
                     ))}
 
                 </ScrollView>

@@ -68,6 +68,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-
+    btn:{
+        marginBottom:sizes.screenHeight*0.03
+    }
 
 })

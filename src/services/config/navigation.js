@@ -25,6 +25,7 @@ import UserProjects from '../../screens/UserProjects';
 import EngineerAddProject from '../../screens/EngineerAddProject';
 import EngineerProject from '../../screens/EngineerProject';
 import UserEngineerProject from '../../screens/UserEngineerProject';
+import UserCreateAppointment from '../../screens/UserCreateAppointment';
 
 
 const Stack = createNativeStackNavigator();
@@ -44,6 +45,7 @@ const UserStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="OnBoard" component={OnBoard} />
+            <Stack.Screen name="UserCreateAppointment" component={UserCreateAppointment} />
             <Stack.Screen name="EngineerAddProject" component={EngineerAddProject} />
             <Stack.Screen name="EngineerProject" component={EngineerProject} />
             <Stack.Screen name="UserEngineerProject" component={UserEngineerProject} />
@@ -66,8 +68,6 @@ const UserStack = () => {
             <Stack.Screen name="AllEngineers" component={AllEngineers} />
             <Stack.Screen name="ApproveEngineer" component={ApproveEngineer} />
             <Stack.Screen name="RemoveEngineer" component={RemoveEngineer} />
-
-
             
         </Stack.Navigator>
     )

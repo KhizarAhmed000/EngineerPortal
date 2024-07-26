@@ -178,7 +178,7 @@ export default function AdminPanel({ navigation }) {
                 <ScrollView style={styles.scrollView}>
                     {listedEngineer.map((item, index) => (
                         <TouchableOpacity style={styles.boxTwo} key={index} onPress={() => handleEngineerDetails(index)}>
-                            <Image style={styles.personImg} source={images.personFour} />
+                            <Image style={styles.personImg} source={images.engineer} />
                             <View style={styles.columnView}>
                                 <Text style={styles.nameText}>{item.name}</Text>
                                 <Text style={styles.desiginationText}>Engineer</Text>

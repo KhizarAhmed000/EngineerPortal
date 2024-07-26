@@ -13,20 +13,23 @@ import rightArrowBlack from '../../../asset/rightArrowBlack.png';
 import plus from '../../../asset/plus.png';
 import crossCircle from '../../../asset/crossCircle.png';
 import building from '../../../asset/building.png';
+import engineer from "../../../asset/engineer.png"
+
 export const images = {
-building,
-backArrow,
-bigTick,
-googleLogo,
-onBoardImg,
-personFour,
-personOne,
-personThree,
-personTwo,
-rightArrow,
-tickAfter,
-tickBefore,
-rightArrowBlack,
-plus,
-crossCircle
+    engineer,
+    building,
+    backArrow,
+    bigTick,
+    googleLogo,
+    onBoardImg,
+    personFour,
+    personOne,
+    personThree,
+    personTwo,
+    rightArrow,
+    tickAfter,
+    tickBefore,
+    rightArrowBlack,
+    plus,
+    crossCircle
 }

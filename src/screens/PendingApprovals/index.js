@@ -24,7 +24,7 @@ export default function PendingApproval({navigation,route}) {
                 >
                     {listOfApprovals.map((item, index) => (
                         <TouchableOpacity style={styles.boxTwo} key={index} onPress={() => handleApprove(index)}>
-                            <Image style={styles.personImg} source={images.personOne} />
+                            <Image style={styles.personImg} source={images.engineer} />
                             <View style={styles.columnView}>
                                 <Text style={styles.nameText}>{item.name}</Text>
                                 <Text style={styles.desiginationText}>Engineer</Text>

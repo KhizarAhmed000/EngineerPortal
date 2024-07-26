@@ -6,7 +6,7 @@ import Button from '../../component/Button';
 import { images } from '../../services/utilities/images';
 
 
-export default function UserBookAppointment({ navigation,route }) {
+export default function UserBookAppointment({ navigation, route }) {
     const [name, setName] = useState('Jenny Wilson')
     const [field, setFeild] = useState('Civil Engineering')
     const [institute, setInstitute] = useState('Bahria University')
@@ -37,17 +37,20 @@ export default function UserBookAppointment({ navigation,route }) {
     //         date: 'Apr 12, 2024'
     //     },
     // ])
-    const {projects,engineer} = route.params
-    console.log(engineer)
+    const { projects, engineer, userData } = route.params
+    console.log("userData", userData)
     const parsedProjects = JSON.parse(projects)
     // console.log(parsedProjects.projects)
 
-    const handleRemoveEngineer = () => {
-        navigation.navigate('AdminPanel')
+    const handleBookAppointment = () => {
+        navigation.navigate("UserCreateAppointment",
+            { userData, engineer }
+        )
+        console.log("sending this", engineer, userData)
     }
 
     const handleProjectDetails = (project) => {
-        navigation.navigate('UserEngineerProject',{
+        navigation.navigate('UserEngineerProject', {
             project
         })
     }
@@ -69,7 +72,7 @@ export default function UserBookAppointment({ navigation,route }) {
                     <Text style={styles.desiginationText}>Year</Text>
                     <Text style={styles.nameText}>{engineer.passingYear}</Text>
                 </View>
-                
+
                 <View style={styles.rowOne}>
                     <Text style={styles.headingTwo}>Portfolio</Text>
                     {/* <TouchableOpacity style={styles.seeAllBtn} onPress={() => handleSeeAll()}>
@@ -77,26 +80,26 @@ export default function UserBookAppointment({ navigation,route }) {
                         <Image style={styles.arrowImg} source={images.rightArrow} />
                     </TouchableOpacity> */}
                 </View>
-                    <View style={styles.scrollViewChild}>
+                <View style={styles.scrollViewChild}>
                     <ScrollView style={styles.scrollView}>
-                    {parsedProjects.projects.map((item,index) => (
-                        <TouchableOpacity style={styles.boxTwo} key={index} onPress={() => handleProjectDetails(item)}>
-                        <Image style={styles.personImg} source={images.building} />
-                        <View style={styles.columnView}>
-                            <Text style={styles.nameText}>{item.projectName}</Text>
-                            <Text style={styles.dateText}>{item.startDate}</Text>
-                        </View>
-                        <Image source={images.rightArrowBlack} style={styles.arrowImgTwo} />
-                    </TouchableOpacity>
-                    ))}
+                        {parsedProjects.projects.map((item, index) => (
+                            <TouchableOpacity style={styles.boxTwo} key={index} onPress={() => handleProjectDetails(item)}>
+                                <Image style={styles.personImg} source={images.building} />
+                                <View style={styles.columnView}>
+                                    <Text style={styles.nameText}>{item.projectName}</Text>
+                                    <Text style={styles.dateText}>{item.startDate}</Text>
+                                </View>
+                                <Image source={images.rightArrowBlack} style={styles.arrowImgTwo} />
+                            </TouchableOpacity>
+                        ))}
 
-                </ScrollView>
-                    </View>
+                    </ScrollView>
+                </View>
                 <View style={styles.btnMarginTop}>
                     <Button
                         title={'Book Appointment'}
-                        // onPress={handleRemoveEngineer} 
-                        />
+                        onPress={handleBookAppointment}
+                    />
                 </View>
             </View>
         </SafeAreaView>

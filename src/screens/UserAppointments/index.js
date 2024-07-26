@@ -4,7 +4,7 @@ import { images } from '../../services/utilities/images';
 import { styles } from './style';
 import BackButton from '../../component/BackButton';
 
-export default function UserBookEngineer({navigation}) {
+export default function UserBookEngineer({navigation,route}) {
     const [allEngineer, setAllEngineer] = useState([
         {
             image: images.personOne,
@@ -27,7 +27,9 @@ export default function UserBookEngineer({navigation}) {
         },
 
     ])
-
+    const {result}= route.params;
+    const parsedResult = JSON.parse(result)
+    console.log(parsedResult.appointments)  
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -37,15 +39,15 @@ export default function UserBookEngineer({navigation}) {
                 <ScrollView
                     style={styles.scrollView}
                 >
-                    {allEngineer.map((item, index) => (
+                    {parsedResult.appointments.map((item, index) => (
                         <View style={styles.boxTwo} key={index}>
-                            <Image style={styles.personImg} source={item.image} />
+                            <Image style={styles.personImg} source={images.engineer} />
                             <View style={styles.columnView}>
-                                <Text style={styles.nameText}>{item.name}</Text>
-                                <Text style={styles.desiginationText}>{item.desigination}</Text>
+                                <Text style={styles.nameText}>{item.clientName}</Text>
+                                <Text style={styles.desiginationText}>Client</Text>
                             </View>
                             <View style={styles.seeAllBtn}>
-                                <Text style={styles.btnText}>{item.date}</Text>
+                                <Text style={styles.btnText}>{item.appointmentDate.slice(0,15)}</Text>
                             </View>
                         </View>
                     ))}

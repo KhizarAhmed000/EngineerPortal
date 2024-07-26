@@ -3,7 +3,7 @@ import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'r
 import { images } from '../../services/utilities/images';
 import { styles } from './style';
 import BackButton from '../../component/BackButton';
-import Navigation from '../../services/config/navigation';
+// import Navigation from '../../services/config/navigation';
 import backendUrl from '../../services/config/backendUrl';
 
 export default function UserBookEngineer({ navigation, route }) {
@@ -50,7 +50,7 @@ export default function UserBookEngineer({ navigation, route }) {
                 >
                     {engineerData.engineers.map((item, index) => (
                         <View style={styles.boxTwo} key={index}>
-                            <Image style={styles.personImg} source={images.personFour} />
+                            <Image style={styles.personImg} source={images.engineer} />
                             <View style={styles.columnView}>
                                 <Text style={styles.nameText}>{item.name}</Text>
                                 <Text style={styles.desiginationText}>Engineer</Text>

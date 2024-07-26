@@ -29,8 +29,8 @@ export const styles = StyleSheet.create({
         marginStart: sizes.screenWidth * 0.01
     },
     personImg: {
-        width: sizes.screenWidth * 0.125,
-        height: sizes.screenHeight * 0.06,
+        width: sizes.screenWidth * 0.12,
+        height: sizes.screenHeight * 0.04,
         borderRadius: sizes.screenWidth * 0.1,
         resizeMode: 'contain'
     },

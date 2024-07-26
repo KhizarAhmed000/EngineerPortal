@@ -68,7 +68,7 @@ export default function AllEngineers({navigation,route}) {
                         <TouchableOpacity style={styles.boxTwo} key={index}
                         onPress={()=>handleApprove(item)}
                         >
-                            <Image style={styles.personImg} source={images.personOne} />
+                            <Image style={styles.personImg} source={images.engineer} />
                             <View style={styles.columnView}>
                                 <Text style={styles.nameText}>{item.name}</Text>
                                 <Text style={styles.desiginationText}>Engineer</Text>

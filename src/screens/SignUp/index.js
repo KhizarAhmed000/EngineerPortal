@@ -47,6 +47,8 @@ export default function SignUp({ navigation, route }) {
         if(error==="validated"){
             const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
         const raw = JSON.stringify({
             "name": name,

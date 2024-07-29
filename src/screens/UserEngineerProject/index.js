@@ -28,72 +28,12 @@ export default function UserEngineerProject({ navigation, route }) {
 
 
 
-    // const requestCameraPermission = async () => {
-    //     const granted = await PermissionsAndroid.request(
-    //         PermissionsAndroid.PERMISSIONS.CAMERA,
-    //     );
-    //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //         console.log('Camera permission granted');
-    //     } else {
-    //         console.warn('Camera permission denied');
-    //     }
-    // };
 
-    // const uploadPhoto = async sourceType => {
-    //     let options = {
-    //         mediaType: 'photo',
-    //         quality: 1,
-    //         maxWidth: 800,
-    //         maxHeight: 600,
-    //         includeBase64: false,
-    //         saveToPhotos: true,
-    //         storageOptions: {
-    //             skipBackup: true,
-    //             path: 'images',
-    //         },
-    //     };
-
-    //     if (sourceType === 'library') {
-    //         launchImageLibrary(options, response => {
-    //             console.log('Library Response:', response);
-    //             try {
-    //                 if (response.assets.length > 0) {
-    //                     const uri = response.assets[0].uri;
-    //                     setImage(prevState => [...prevState, { pic: { uri } }]);
-    //                 } else {
-    //                     console.warn('No image selected from library');
-    //                 }
-    //             } catch (error) {
-    //                 console.error('Error setting image:', error);
-    //             }
-    //         });
-
-    //     } else if (sourceType === 'camera') {
-    //         await requestCameraPermission();
-
-    //         launchCamera(options, response => {
-    //             console.log('** Full Camera Response:**', response.assets[0].uri);
-    //             try {
-    //                 if (response.assets.length > 0) {
-    //                     const uri = response.assets[0].uri;
-    //                     setImage(prevState => [...prevState, { pic: { uri } }]);
-    //                 } else {
-    //                     console.warn('No image taken from camera');
-    //                 }
-    //             } catch (error) {
-    //                 console.error('Error setting image:', error);
-    //             }
-    //         });
-
-    //     }
-    // };
-    // const deleteImage = index => {
-    //     setImage(prevState => prevState.filter((_, i) => i !== index));
-    // };
     const handleRemoveProject = () => {
         console.log(project.project._id)
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('ngrok-skip-browser-warning', 'true')
 
         const raw = JSON.stringify({
             "id": project.project._id
@@ -112,6 +52,8 @@ export default function UserEngineerProject({ navigation, route }) {
                 console.log(result)
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
+                myHeaders.append('ngrok-skip-browser-warning', 'true')
+
                 // console.log(email)
                 const raw = JSON.stringify({
                     "email": project.project.engineer
@@ -131,6 +73,8 @@ export default function UserEngineerProject({ navigation, route }) {
 
                         const myHeaders = new Headers();
                         myHeaders.append("Content-Type", "application/json");
+                        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
                         const raw = JSON.stringify({
                             "email": project.project.engineer
@@ -213,7 +157,7 @@ export default function UserEngineerProject({ navigation, route }) {
 
                     </View>
 
-                    
+
                 </ScrollView>
 
             </View>

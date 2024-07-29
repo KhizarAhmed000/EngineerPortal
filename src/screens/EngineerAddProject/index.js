@@ -59,6 +59,8 @@ export default function EngineerAddProject({ navigation, route }) {
         // console.log(userData.userData.engineer.email)
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
         // data = JSON.parse(userData.userData.engineer)
         console.log(userData.userData.engineer.email)
         email = userData.userData.engineer.email
@@ -85,6 +87,8 @@ export default function EngineerAddProject({ navigation, route }) {
                 console.log(result)
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
+                myHeaders.append('ngrok-skip-browser-warning', 'true')
+
                 // console.log(email)
                 const raw = JSON.stringify({
                     "email": userData.userData.engineer.email
@@ -104,6 +108,8 @@ export default function EngineerAddProject({ navigation, route }) {
 
                         const myHeaders = new Headers();
                         myHeaders.append("Content-Type", "application/json");
+                        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
                         const raw = JSON.stringify({
                             "email": userData.userData.engineer.email

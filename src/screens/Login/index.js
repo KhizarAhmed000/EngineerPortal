@@ -37,6 +37,7 @@ export default function Login({ navigation }) {
             console.log("validated")
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
+            myHeaders.append('ngrok-skip-browser-warning', 'true')
 
             const raw = JSON.stringify({
                 "password": password,
@@ -66,6 +67,8 @@ export default function Login({ navigation }) {
 
                         const myHeaders = new Headers();
                         myHeaders.append("Content-Type", "application/json");
+                        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
                         // console.log(email)
                         const raw = JSON.stringify({
                             "email": name
@@ -85,6 +88,8 @@ export default function Login({ navigation }) {
 
                                 const myHeaders = new Headers();
                                 myHeaders.append("Content-Type", "application/json");
+                                myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
                                 const raw = JSON.stringify({
                                     "email": name
@@ -107,7 +112,7 @@ export default function Login({ navigation }) {
                                     })
                                     .catch((error) => console.error(error));
 
-                                
+
                             })
                             .catch((error) => console.error(error));
 
@@ -119,13 +124,13 @@ export default function Login({ navigation }) {
                         const requestOptions = {
                             method: "GET",
                             redirect: "follow"
-                          };
-                          
-                          fetch(`${backendUrl}user/getAllEngineers`, requestOptions)
+                        };
+
+                        fetch(`${backendUrl}user/getAllEngineers`, requestOptions)
                             .then((response) => response.text())
                             .then((result) => {
                                 const parsedEngineerData = JSON.parse(result)
-                                const hiredEngineers = filterHiredEngineers(parsedEngineerData.engineers,data.member.email)
+                                const hiredEngineers = filterHiredEngineers(parsedEngineerData.engineers, data.member.email)
                                 const projects = extractProjectIds(hiredEngineers)
                                 const appointments = extractAppointmentIds(hiredEngineers)
                                 // console.log("hiredEngineers:",hiredEngineers)
@@ -141,7 +146,7 @@ export default function Login({ navigation }) {
                                 });
                             })
                             .catch((error) => console.error(error));
-                        
+
                     }
                 })
                 .catch((error) => console.error(error));

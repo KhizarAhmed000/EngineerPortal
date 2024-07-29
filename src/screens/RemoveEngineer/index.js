@@ -19,6 +19,8 @@ export default function RemoveEngineer({ navigation, route }) {
         console.log(engineer.email, "email of engineer")
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
         const raw = JSON.stringify({
             "email": engineer.email

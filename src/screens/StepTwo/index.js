@@ -29,6 +29,8 @@ export default function StepTwo({ navigation, route }) {
 
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
+            myHeaders.append('ngrok-skip-browser-warning', 'true')
+
             
             const raw = JSON.stringify({
                 "email": email,

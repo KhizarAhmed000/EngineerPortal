@@ -46,6 +46,7 @@ export default function UserPanel({ navigation, route }) {
     const handleAppointments = () => {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('ngrok-skip-browser-warning', 'true')
 
         const raw = JSON.stringify({
             "appointmentIds": appointments
@@ -74,6 +75,8 @@ export default function UserPanel({ navigation, route }) {
         console.log(engineer)
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
         const raw = JSON.stringify({
             "email": engineer.email

@@ -112,6 +112,8 @@ export default function EngineerProject({ navigation, route }) {
                 console.log(result)
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
+                myHeaders.append('ngrok-skip-browser-warning', 'true')
+
                 // console.log(email)
                 const raw = JSON.stringify({
                     "email": project.project.engineer
@@ -131,6 +133,8 @@ export default function EngineerProject({ navigation, route }) {
 
                         const myHeaders = new Headers();
                         myHeaders.append("Content-Type", "application/json");
+                        myHeaders.append('ngrok-skip-browser-warning', 'true')
+
 
                         const raw = JSON.stringify({
                             "email": project.project.engineer
